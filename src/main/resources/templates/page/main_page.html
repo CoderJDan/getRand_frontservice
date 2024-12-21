@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>getRand(){ };</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/script/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!--header fragment-->
+    <th:block th:replace="/layout/header_layout :: header-layout"></th:block>
+
+    <!--main content fragment-->
+    <th:block th:replace="/layout/mainContent_layout :: mainContent-layout"></th:block>
+
+    <!--footer fragment-->
+    <th:block th:replace="/layout/footer_layout :: footer-layout"></th:block>
+</body>
+
+<script>
+    const lineChart = document.getElementById('myChart');
+
+    new Chart(lineChart, {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        }
+    })
+</script>
+
+</html>

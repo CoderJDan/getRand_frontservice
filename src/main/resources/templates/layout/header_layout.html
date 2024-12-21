@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+    <div th:fragment="header-layout">
+        <header>
+            <h1>getRand(){ };</h1>
+            <p>Developer Trends & Insights from Google</p>
+            <div>
+                <img id="openModalBtn" class="login-button" type="button"
+                     src="https://img.icons8.com/?size=100&id=1sz29d1euCqB&format=png&color=000000">
+            </div>
+        </header>
+
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="closeModalBtn">&times;</span>
+                <!-- 로그인/회원가입 컨텐츠 -->
+                <div id="authView">
+                    <!-- 로그인 뷰 -->
+                    <div id="loginView">
+                        <h2>로그인</h2>
+                        <input type="text" id="loginUsername" placeholder="아이디">
+                        <input type="password" id="loginPassword" placeholder="비밀번호">
+                        <button id="loginBtn">로그인</button>
+                        <p class="switch-view">
+                            계정이 없으신가요? <a id="showSignup">회원가입</a>
+                        </p>
+                    </div>
+
+                    <div id="signupView" style="display: none;">
+                        <h2>회원가입</h2>
+                        <input type="text" id="signupUsername" placeholder="이름">
+                        <input type="text" id="signupUsername" placeholder="아이디">
+                        <input type="email" id="signupEmail" placeholder="이메일">
+                        <input type="password" id="signupPassword" placeholder="비밀번호">
+                        <input type="password" id="confirmPassword" placeholder="비밀번호 확인">
+                        <button id="signupBtn">회원가입</button>
+                        <p class="switch-view">
+                            이미 계정이 있으신가요? <a id="showLogin">로그인</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
