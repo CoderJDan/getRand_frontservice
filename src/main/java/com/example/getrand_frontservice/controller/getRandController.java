@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/getrand")
+//@RequestMapping("/page")
 public class getRandController {
-    @GetMapping
-    public String getRand() {
-        return "/page/main_page";
-    }
+//    @GetMapping("/main")
+//    public String getRand() {
+//        return "/page/main_page";
+//    }
 }
