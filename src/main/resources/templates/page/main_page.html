@@ -1,40 +1,166 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>getRand(){ };</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/script/script.js"></script>
+    <link rel="stylesheet" href="/getrand/css/style.css">
+    <script src="/getrand/script/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <!--header fragment-->
-    <th:block th:replace="/layout/header_layout :: header-layout"></th:block>
+<!--header fragment-->
+<th:block th:replace="/layout/header_layout :: header-layout"></th:block>
 
-    <!--main content fragment-->
-    <th:block th:replace="/layout/mainContent_layout :: mainContent-layout"></th:block>
+<!--main content fragment-->
+<th:block th:replace="/layout/mainContent/moveTagContent :: moveTagContent"></th:block>
+<th:block th:replace="/layout/mainContent/seachContent :: searchContent"></th:block>
+<th:block th:replace="/layout/mainContent/chartContent :: chartContent"></th:block>
+<th:block th:replace="/layout/mainContent/dataSummaryContent :: dataSummaryContent"></th:block>
 
-    <!--footer fragment-->
-    <th:block th:replace="/layout/footer_layout :: footer-layout"></th:block>
+<!--footer fragment-->
+<th:block th:replace="/layout/footer_layout :: footer-layout"></th:block>
 </body>
 
 <script>
-    const lineChart = document.getElementById('myChart');
+    let myChart;
+    console.log(myChart);
 
-    new Chart(lineChart, {
-        type: 'line',
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'My First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            }]
-        }
-    })
+    $(document).ready(() => {
+        // Develop keyword 검색 수 데이터 통신
+
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:5001/datacollectionservice/defaultPastOY/findall",
+            // dataType: "json"
+        }).done((jsondata) => {
+            const dates = [];
+            const values = [];
+            for (let i = 0; i < jsondata.length; i++) {
+                dates.push(jsondata[i].date);
+                values.push(jsondata[i].value);
+            }
+
+            const lineChart = document.getElementById('myChart');
+
+            myChart = new Chart(lineChart, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Develop Keyword search',
+                        data: values,
+                        fill: false,
+                        borderColor: 'rgb(76, 141, 246)',
+                        tension: 0.1,
+                    }]
+                },
+                options: {
+                    // 라벨 제거 옵션
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        // grid 제거 옵션
+                        x: {
+                            beginAtZero: true,
+                            scaleLineColor: 'red',
+                            grid: {
+                                color: 'transparent',
+                            },
+                            display: false,
+                        },
+                        // y: {
+                        //     beginAtZero: true,
+                        //     grid: {
+                        //         color: 'transparent',
+                        //     },
+                        // }
+                    }
+                }
+            })
+
+            document.getElementById("keyword-refresh").addEventListener("click", () => {
+                // Develop keyword 검색 수 데이터 업데이트 통신
+
+                const lineChart = document.getElementById('myChart')
+                if (myChart) { // 차트 객체가 존재하는 경우에만 destroy
+                    myChart.destroy();
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1:5001/datacollectionservice/defaultPastOY/update",
+                    // dataType: "json"
+                }).done((jsondata) => {
+                    const dates = [];
+                    const values = [];
+                    for (let i = 0; i < jsondata.length; i++) {
+                        dates.push(jsondata[i].date);
+                        values.push(jsondata[i].value);
+                    }
+
+                    const lineChart = document.getElementById('myChart');
+
+                    new Chart(lineChart, {
+                        type: 'line',
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: 'Develop Keyword search',
+                                data: values,
+                                fill: false,
+                                borderColor: 'rgb(76, 141, 246)',
+                                tension: 0.1,
+                            }]
+                        },
+                        options: {
+                            // 라벨 제거 옵션
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                // grid 제거 옵션
+                                x: {
+                                    beginAtZero: true,
+                                    scaleLineColor: 'red',
+                                    grid: {
+                                        color: 'transparent',
+                                    },
+                                    display: false,
+                                },
+                                // y: {
+                                //     beginAtZero: true,
+                                //     grid: {
+                                //         color: 'transparent',
+                                //     },
+                                // }
+                            }
+                        }
+                    })
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                })
+            })
+
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        })
+    });
+
+
+
+
+
+
 </script>
 
 </html>

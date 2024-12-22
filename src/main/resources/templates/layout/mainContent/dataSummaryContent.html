@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+<div th:fragment="dataSummaryContent" class="data-summary-container">
+    <section class="data-summary">
+        <div class="list-container">
+            <div class="list-box">
+                <div class="list-header">
+                    <h3 class="list-title">왼쪽 리스트 제목
+                        <button class="refresh-button" id="left-refresh">&#x21bb;</button>
+                    </h3>
+
+                </div>
+                <ul id="left-list">
+                    <li>왼쪽 리스트 항목 1</li>
+                    <li>왼쪽 리스트 항목 2</li>
+                    <li>왼쪽 리스트 항목 3</li>
+                </ul>
+            </div>
+            <div class="list-box">
+                <div class="list-header">
+                    <h3 class="list-title">오른쪽 리스트 제목
+                        <button class="refresh-button" id="right-refresh">&#x21bb;</button>
+                    </h3>
+                </div>
+                <ul id="right-list">
+                    <li>오른쪽 리스트 항목 1</li>
+                    <li>오른쪽 리스트 항목 2</li>
+                    <li>오른쪽 리스트 항목 3</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
