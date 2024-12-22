@@ -5,21 +5,32 @@
     <title>getRand(){ };</title>
     <link rel="stylesheet" href="/getrand/css/style.css">
     <script src="/getrand/script/script.js"></script>
+    <script src="/getrand/script/relatedQuery.js"></script>
+    <script src="/getrand/script/realTimeTrend.js"></script>
+    <script src="/getrand/script/relatedTopic.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        #left-list li, #right-list li {
+            color: black; /* 텍스트 색상 */
+            font-size: 16px; /* 글자 크기 */
+            display: list-item; /* 기본 리스트 표시 */
+            visibility: visible; /* 요소 가시화 */
+        }
+    </style>
 </head>
 <body>
 <!--header fragment-->
-<th:block th:replace="/layout/header_layout :: header-layout"></th:block>
+<th:block th:replace="~{/layout/header_layout :: header-layout}"></th:block>
 
 <!--main content fragment-->
-<th:block th:replace="/layout/mainContent/moveTagContent :: moveTagContent"></th:block>
-<th:block th:replace="/layout/mainContent/seachContent :: searchContent"></th:block>
-<th:block th:replace="/layout/mainContent/chartContent :: chartContent"></th:block>
-<th:block th:replace="/layout/mainContent/dataSummaryContent :: dataSummaryContent"></th:block>
+<th:block th:replace="~{/layout/mainContent/moveTagContent :: moveTagContent}"></th:block>
+<th:block th:replace="~{/layout/mainContent/seachContent :: searchContent}"></th:block>
+<th:block th:replace="~{/layout/mainContent/chartContent :: chartContent}"></th:block>
+<th:block th:replace="~{/layout/mainContent/dataSummaryContent :: dataSummaryContent}"></th:block>
 
 <!--footer fragment-->
-<th:block th:replace="/layout/footer_layout :: footer-layout"></th:block>
+<th:block th:replace="~{/layout/footer_layout :: footer-layout}"></th:block>
 </body>
 
 <script>
