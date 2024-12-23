@@ -7,9 +7,7 @@
     <script src="/getrand/script/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/getrand/script/relatedQuery.js"></script>
     <script src="/getrand/script/realTimeTrend.js"></script>
-    <script src="/getrand/script/relatedTopic.js"></script>
 </head>
 <body>
 <!--header fragment-->
@@ -23,6 +21,8 @@
 
 <!--footer fragment-->
 <th:block th:replace="/layout/footer_layout :: footer-layout"></th:block>
+<script src="/getrand/script/relatedTopic.js"></script>
+<script src="/getrand/script/relatedQuery.js"></script>
 </body>
 
 <script>
@@ -155,6 +155,11 @@
 
                 var searchInput = $("#searchInput").val();
 
+                if (!searchInput || searchInput.trim() === "") {
+                    alert("검색어를 입력해주세요.");
+                    return;
+                }
+
                 const lineChart = document.getElementById('myChart')
                 if (myChart) { // 차트 객체가 존재하는 경우에만 destroy
                     myChart.destroy();
@@ -179,7 +184,7 @@
                         data: {
                             labels: dates,
                             datasets: [{
-                                label: 'Develop Keyword search',
+                                label: searchInput + ' Keyword search',
                                 data: values,
                                 fill: false,
                                 borderColor: 'rgb(76, 141, 246)',
