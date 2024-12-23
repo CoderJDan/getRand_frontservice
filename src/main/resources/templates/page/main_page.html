@@ -7,6 +7,9 @@
     <script src="/getrand/script/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/getrand/script/relatedQuery.js"></script>
+    <script src="/getrand/script/realTimeTrend.js"></script>
+    <script src="/getrand/script/relatedTopic.js"></script>
 </head>
 <body>
 <!--header fragment-->
@@ -31,7 +34,7 @@
 
         $.ajax({
             type: "GET",
-            url: "http://127.0.0.1:5001/datacollectionservice/defaultPastOY/findall",
+            url: "http://127.0.0.1:5001/analysticservice/defaultPastOY/findall",
             // dataType: "json"
         }).done((jsondata) => {
             const dates = [];
@@ -92,7 +95,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "http://127.0.0.1:5001/datacollectionservice/defaultPastOY/update",
+                    url: "http://127.0.0.1:5001/analysticservice/defaultPastOY/update",
                     // dataType: "json"
                 }).done((jsondata) => {
                     const dates = [];
