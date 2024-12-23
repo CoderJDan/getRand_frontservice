@@ -9,13 +9,17 @@ document.getElementById("right-refresh").addEventListener("click", () => {
 function renderTopicData(data) {
     const container = document.getElementById('right-list');
     container.innerHTML = '';
-    data.forEach(item => {
+    data.forEach((item, index) => {
         const topicElement = document.createElement('li'); // li 태그 생성
-        topicElement.textContent = `Topic: ${item.title}, Volume: ${item.value}`;
+        topicElement.textContent = `${index + 1} ${item.title}`;
+
+        topicElement.addEventListener('click', () => {
+            window.open(`https://www.google.com/search?q=${encodeURIComponent(item.title)}`, '_blank');
+        });
+
         container.appendChild(topicElement);
     });
 }
-
 
 function getRelatedTopic() {
     $.ajax({
@@ -23,7 +27,6 @@ function getRelatedTopic() {
         url: "http://127.0.0.1:5001/analysticservice/relatedTopics/findall"
     }).done((jsondata) => {
         // 가져온 데이터를 HTML에 표시
-        console.log(jsondata)
         renderTopicData(jsondata);
     }).fail((err) => {
         console.error("데이터 받기 실패", err);

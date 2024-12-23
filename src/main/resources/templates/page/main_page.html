@@ -27,7 +27,6 @@
 
 <script>
     let myChart;
-    console.log(myChart);
 
     $(document).ready(() => {
         // Develop keyword 검색 수 데이터 통신
@@ -150,6 +149,76 @@
                     console.log(textStatus);
                     console.log(errorThrown);
                 })
+            })
+
+            document.getElementById("searchButton").addEventListener("click", () => {
+
+                var searchInput = $("#searchInput").val();
+
+                const lineChart = document.getElementById('myChart')
+                if (myChart) { // 차트 객체가 존재하는 경우에만 destroy
+                    myChart.destroy();
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1:5001/analysticservice/defaultPastOY/keyword",
+                    data: { keyword: searchInput }
+                }).done((jsondata) => {
+                    const dates = [];
+                    const values = [];
+                    for (let i = 0; i < jsondata.length; i++) {
+                        dates.push(jsondata[i].date);
+                        values.push(jsondata[i].value);
+                    }
+
+                    const lineChart = document.getElementById('myChart');
+
+                    new Chart(lineChart, {
+                        type: 'line',
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: 'Develop Keyword search',
+                                data: values,
+                                fill: false,
+                                borderColor: 'rgb(76, 141, 246)',
+                                tension: 0.1,
+                            }]
+                        },
+                        options: {
+                            // 라벨 제거 옵션
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                // grid 제거 옵션
+                                x: {
+                                    beginAtZero: true,
+                                    scaleLineColor: 'red',
+                                    grid: {
+                                        color: 'transparent',
+                                    },
+                                    display: false,
+                                },
+                                // y: {
+                                //     beginAtZero: true,
+                                //     grid: {
+                                //         color: 'transparent',
+                                //     },
+                                // }
+                            }
+                        }
+                    })
+
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                })
+
             })
 
         }).fail(function (jqXHR, textStatus, errorThrown) {
