@@ -154,6 +154,7 @@
             document.getElementById("searchButton").addEventListener("click", () => {
 
                 var searchInput = $("#searchInput").val();
+                console.log(searchInput);
 
                 if (!searchInput || searchInput.trim() === "") {
                     alert("검색어를 입력해주세요.");
