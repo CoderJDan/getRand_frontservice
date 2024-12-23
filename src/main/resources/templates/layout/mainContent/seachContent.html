@@ -12,8 +12,36 @@
                             d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                 </svg>
             </button>
+            <div class="dropdown" id="dropdown" style="display: none;">
+                <div>
+                    <h3 class="dropdown-title">실시간 검색어 TOP 10
+                        <button class="refresh-button" id="realTime-refresh">&#x21bb;</button>
+                    </h3>
+                </div>
+                <ul id="dropdown-list">
+                    <li class="dropdown-item">Option 1</li>
+                    <li class="dropdown-item">Option 2</li>
+                    <li class="dropdown-item">Option 3</li>
+                    <li class="dropdown-item">Option 4</li>
+                </ul>
+            </div>
         </div>
     </section>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('focus', function() {
+            const dropdown = document.getElementById('dropdown');
+            dropdown.style.display = 'block';
+        });
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdown');
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
 </div>
 </body>
 </html>
